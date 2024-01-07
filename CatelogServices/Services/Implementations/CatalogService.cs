@@ -1,6 +1,7 @@
 ﻿using CatelogServices.DBModels;
 using CatelogServices.DBModels.Models;
 using CatelogServices.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CatelogServices.Services.Implementations;
 
@@ -30,7 +31,7 @@ public class CatalogService(AppDBContext dBContext) : ICatalogRepository
 
     public Category GetCategoryById(int id)
     {
-        return dBContext.Categories?.FirstOrDefault(x => x.CategoryId == id);
+        return dBContext.Categories.Where(x => x.CategoryId == id).FirstOrDefault();
     }
 
 }

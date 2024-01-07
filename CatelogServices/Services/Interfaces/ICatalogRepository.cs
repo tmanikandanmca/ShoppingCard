@@ -1,5 +1,4 @@
 ﻿using CatelogServices.DBModels;
-
 namespace CatelogServices.Services.Interfaces;
 
 public interface ICatalogRepository

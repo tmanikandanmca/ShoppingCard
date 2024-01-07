@@ -1,11 +1,10 @@
 ﻿using CatelogServices.DBModels;
 using CatelogServices.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CatelogServices.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class CatalogController : ControllerBase
 {
@@ -27,13 +26,13 @@ public class CatalogController : ControllerBase
         return Ok(catalog.GetCategoryById(Id));
     }
 
-    [HttpPost("AddCategory")]
+    [HttpPost]
     public async Task<IActionResult> AddCatagory(Category category)
     {
         return Ok(catalog.AddCategory(category));
     }
 
-    [HttpDelete]
+    [HttpDelete("RemoveProduct")]
     public async Task<IActionResult> RemoveCatagoryById(int Id)
     {
         return Ok(catalog.DeleteCategory(Id));

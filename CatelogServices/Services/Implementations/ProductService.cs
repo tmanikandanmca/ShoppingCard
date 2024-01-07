@@ -23,11 +23,11 @@ public class ProductService(AppDBContext dBContext) : IProductRepository
 
     public IEnumerable<Product> GetProduct()
     {
-       return dBContext.Products;
+        return dBContext.Products;
     }
 
     public Product GetProductById(int id)
     {
-      return (dBContext.Products.FirstOrDefault(e=>e.ProductId==id)) as Product;
+      return dBContext.Products.Where(e=>e.ProductId==id).FirstOrDefault();
     }
 }
