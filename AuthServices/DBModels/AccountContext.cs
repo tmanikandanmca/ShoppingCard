@@ -17,4 +17,7 @@ public partial class AccountContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
 }
