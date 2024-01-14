@@ -46,7 +46,7 @@ public class AuthServiceRepository(AccountContext db, IConfiguration config) : I
     {
         try
         {
-            var data = db.Users.Where(e => e.Email == login.email).FirstOrDefault();
+            var data = db.Users.Include(e=>e.Roles).Where(e => e.Email == login.email).FirstOrDefault();
             if (data is null) return null;
             var res = BCrypt.Net.BCrypt.Verify(login.password, data.Password);
             if (!res) return null;
@@ -56,8 +56,8 @@ public class AuthServiceRepository(AccountContext db, IConfiguration config) : I
                 Name = data.Name,
                 Email = data.Email,
                 PhoneNumber = data.PhoneNumber,
+                Roles = data.Roles.Select(e => e.Name).ToArray(),
             };
-            user.Roles = db.Roles.Select(x => x.Name).ToArray();
             user.Token = GenerateJsonToken(user);
 
             return user;
