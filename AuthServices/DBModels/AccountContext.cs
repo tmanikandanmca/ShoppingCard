@@ -2,6 +2,8 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using AuthServices.DBModels.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthServices.Models;
@@ -16,8 +18,15 @@ public partial class AccountContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        //modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        //modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+    }
 
 
 }

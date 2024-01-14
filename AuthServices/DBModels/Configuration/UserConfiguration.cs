@@ -11,6 +11,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         entity
             .ToTable("Users");
         entity
+            .HasKey(c => c.Id);
+        entity
             .Property(e => e.Email)
             .IsRequired();
         entity
